@@ -1,33 +1,33 @@
-import puppeteer from "puppeteer";
+// https://crontab.guru/ to generate cron expression
+import * as dotenv from "dotenv";
+import { CronJob } from "cron";
+import { sendMessage } from "./messenger";
+import { Environment } from "./models";
 
-(async () => {
-  const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
+dotenv.config();
 
-  await page.goto("https://developers.google.com/web/");
+const ENV_VARS: Environment = process.env as Environment;
 
-  // Type into search box.
-  await page.type(".devsite-search-field", "Headless Chrome");
+const job = new CronJob(
+  // "10 9 * * *",
+  // "* * * * * *",
+  "28 17 * * *",
+  async () => {
+    console.log("Job running");
 
-  // Wait for suggest overlay to appear and click "show all results".
-  const allResultsSelector = ".devsite-suggest-all-results";
-  await page.waitForSelector(allResultsSelector);
-  await page.click(allResultsSelector);
-
-  // Wait for the results page to load and display the results.
-  const resultsSelector = ".gsc-results .gs-title";
-  await page.waitForSelector(resultsSelector);
-
-  // Extract the results from the page.
-  const links = await page.evaluate((resultsSelector) => {
-    return [...document.querySelectorAll(resultsSelector)].map((anchor) => {
-      const title = anchor?.textContent?.split("|")[0].trim();
-      return `${title} - ${(anchor as any).href}`;
+    await sendMessage({
+      email: ENV_VARS.MESSENGER_EMAIL_ADDRESS,
+      password: ENV_VARS.MESSENGER_PASSWORD,
+      chatId: ENV_VARS.MESSENGER_CHAT_ID,
+      message: "Automated cron message",
     });
-  }, resultsSelector);
 
-  // Print all the files.
-  console.log(links.join("\n"));
+    console.log("Job finished");
+  },
+  null,
+  false,
+  "Europe/London"
+);
 
-  await browser.close();
-})();
+job.start();
+console.log("Job started");

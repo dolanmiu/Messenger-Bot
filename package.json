@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cron": "^2.0.0",
+    "cron": "^2.2.0",
+    "dotenv": "^16.0.3",
     "puppeteer": "^19.5.2"
   },
   "devDependencies": {
