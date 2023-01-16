@@ -1,6 +1,6 @@
 # Messenger Bot
 
-> Send messages to people on Facebook Messenger without having to use the Facebook Messenger app.
+> Send and automate messages to people on Facebook Messenger without having to use the Facebook Messenger app.
 
 It uses Puppeteer to automate the process of sending messages to people on Facebook Messenger. It uses a cron job to send messages at a specified time.
 
