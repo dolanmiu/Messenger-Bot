@@ -1,19 +1,27 @@
 {
-  "events": [
+  "chats": [
     {
-      "name": "Say Good Morning",
-      "cron": "10 9 * * *",
-      "message": "Morning babe! 🥰"
-    },
-    {
-      "name": "Say Good Night",
-      "cron": "1 3 * * *",
-      "message": "Good night babe! 🥰"
+      "chatId": "12345678",
+      "events": [
+        {
+          "name": "Say Good Morning",
+          "cron": "10 9 * * *",
+          "message": "Morning babe! 🥰",
+          "useChatGpt": false
+        },
+        {
+          "name": "Say Good Night",
+          "cron": "1 3 * * *",
+          "message": "Good night babe! 🥰",
+          "useChatGpt": false
+        }
+      ]
     }
   ],
   "puppeteerArgs": {
     "headless": false,
     "executablePath": "/usr/bin/chromium-browser",
     "args": ["--no-sandbox", "--disable-setuid-sandbox"]
-  }
+  },
+  "timeZone": "Europe/London"
 }
