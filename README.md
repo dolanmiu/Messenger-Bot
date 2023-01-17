@@ -43,11 +43,10 @@ $ cp src/config.json.example src/config.json
 
 #### What ENV variables mean
 
-| Variable                | Description                                                                                                                                                                                                                                                      |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MESSENGER_EMAIL_ADDRESS | Your Facebook email address                                                                                                                                                                                                                                      |
-| MESSENGER_PASSWORD      | Your Facebook password                                                                                                                                                                                                                                           |
-| MESSENGER_CHAT_ID       | The ID of the person you want to send the message to. You can get this by going to the person's profile and copying the number at the end of the URL. For example, if the URL is `https://www.facebook.com/messages/t/12345678`, then the chat ID is `12345678`. |
+| Variable                | Description                 |
+| ----------------------- | --------------------------- |
+| MESSENGER_EMAIL_ADDRESS | Your Facebook email address |
+| MESSENGER_PASSWORD      | Your Facebook password      |
 
 #### What config.json means
 
