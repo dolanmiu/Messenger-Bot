@@ -1,0 +1,14 @@
+{
+  "events": [
+    {
+      "name": "Say Good Morning",
+      "cron": "10 9 * * *",
+      "message": "Morning babe! 🥰"
+    },
+    {
+      "name": "Say Good Night",
+      "cron": "1 3 * * *",
+      "message": "Good night babe! 🥰"
+    }
+  ]
+}

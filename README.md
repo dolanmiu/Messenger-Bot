@@ -10,10 +10,14 @@ It uses Puppeteer to automate the process of sending messages to people on Faceb
 $ npm install
 ```
 
-### Set ENV variables
+### Set ENV variables and config
 
 ```sh
 $ cp .env.example .env
+```
+
+```sh
+$ cp src/config.json.example src/config.json
 ```
 
 #### What ENV variables mean
