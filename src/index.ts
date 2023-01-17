@@ -22,6 +22,7 @@ for (const { cron, message, name } of config.events) {
         password: ENV_VARS.MESSENGER_PASSWORD,
         chatId: ENV_VARS.MESSENGER_CHAT_ID,
         message: message,
+        puppeteerArgs: config.puppeteerArgs,
       });
 
       console.log("Job finished");

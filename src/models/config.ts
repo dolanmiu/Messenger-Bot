@@ -1,5 +1,8 @@
+import { PuppeteerLaunchOptions } from "puppeteer";
+
 export interface Config {
-  events: Event[];
+  readonly events: readonly Event[];
+  readonly puppeteerArgs: PuppeteerLaunchOptions;
 }
 
 export interface Event {

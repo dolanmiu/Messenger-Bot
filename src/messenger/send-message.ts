@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer, { PuppeteerLaunchOptions } from "puppeteer";
 
 import { closeCookieDialog, delay, login, logout, sendText } from "./util";
 
@@ -7,13 +7,15 @@ export const sendMessage = async ({
   password,
   chatId,
   message,
+  puppeteerArgs,
 }: {
   readonly email: string;
   readonly password: string;
   readonly chatId: string;
   readonly message: string;
+  readonly puppeteerArgs: PuppeteerLaunchOptions;
 }): Promise<void> => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch(puppeteerArgs);
   const page = await browser.newPage();
 
   await page.goto("https://messenger.com");
