@@ -23,10 +23,30 @@ export const sendMessage = async ({
   await page.goto("https://messenger.com");
   await closeCookieDialog(page);
   await login(page, email, password);
-  await page.goto(`https://www.messenger.com/t/${chatId}`);
+  await retry(async () => {
+    await page.goto(`https://www.messenger.com/t/${chatId}`, {
+      timeout: 1000 * 60 * 15,
+    });
+  });
   await sendText(page, message);
   await delay(5000);
   await logout(page);
   await delay(5000);
   await browser.close();
+};
+
+const retry = async (
+  fn: () => Promise<void>,
+  retriesLeft = 5
+): Promise<void> => {
+  try {
+    await fn();
+  } catch (error) {
+    if (retriesLeft) {
+      await delay(5000);
+      await retry(fn, retriesLeft - 1);
+    } else {
+      throw error;
+    }
+  }
 };
