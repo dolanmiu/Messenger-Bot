@@ -11,6 +11,10 @@ dotenv.config();
 
 const ENV_VARS: Environment = process.env as Environment;
 
+if (config.puppeteerArgs.executablePath) {
+  process.env.PUPPETEER_EXECUTABLE_PATH = config.puppeteerArgs.executablePath;
+}
+
 for (const { events, chatId } of config.chats) {
   console.log("Loading events for:", chatId);
 
