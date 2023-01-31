@@ -6,6 +6,7 @@ import { getCache, setCacheItem } from "./chat-gpt";
 import { sendMessage } from "./messenger";
 import { Environment } from "./models";
 import config from "./config.json";
+import { retryFunctionOnError } from "./retry";
 
 dotenv.config();
 
@@ -24,15 +25,20 @@ for (const { events, chatId } of config.chats) {
     const job = new CronJob(
       cron,
       async () => {
+        await retryFunctionOnError(
+          async () => {
+            await sendMessage({
+              email: ENV_VARS.MESSENGER_EMAIL_ADDRESS,
+              password: ENV_VARS.MESSENGER_PASSWORD,
+              chatId,
+              message: useChatGpt ? getCache(message) : message,
+              puppeteerArgs: config.puppeteerArgs,
+            });
+          },
+          10,
+          30000
+        );
         console.log("Job running:", name);
-
-        await sendMessage({
-          email: ENV_VARS.MESSENGER_EMAIL_ADDRESS,
-          password: ENV_VARS.MESSENGER_PASSWORD,
-          chatId,
-          message: useChatGpt ? getCache(message) : message,
-          puppeteerArgs: config.puppeteerArgs,
-        });
 
         console.log("Job finished");
       },
