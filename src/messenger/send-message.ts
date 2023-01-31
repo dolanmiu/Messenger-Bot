@@ -17,8 +17,8 @@ export const sendMessage = async ({
 }): Promise<void> => {
   const browser = await puppeteer.launch(puppeteerArgs);
   const page = await browser.newPage();
-  page.setDefaultNavigationTimeout(0);
-  page.setDefaultTimeout(0);
+  page.setDefaultNavigationTimeout(900000);
+  page.setDefaultTimeout(900000);
 
   await page.goto("https://messenger.com");
   await closeCookieDialog(page);
